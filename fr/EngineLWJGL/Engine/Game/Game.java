@@ -5,7 +5,7 @@ import org.lwjgl.opengl.GL11;
 
 import fr.EngineLWJGL.Engine.Graphic.Input;
 import fr.EngineLWJGL.Engine.Graphic.Render;
-import fr.EngineLWJGL.Engine.Graphic.RenderUtil;
+import fr.EngineLWJGL.Engine.Graphic.RenderTools;
 
 public class Game 
 {
@@ -30,7 +30,7 @@ public class Game
 	
 	public void render()
 	{
-		RenderUtil.clear();
+		RenderTools.clear();
 		GL11.glLoadIdentity();
 		GL11.glOrtho(0.0, Display.getDisplayMode().getWidth(), 0.0, Display.getDisplayMode().getHeight(), -1.0, 1.0);
 		/*GL11.glLoadIdentity();
