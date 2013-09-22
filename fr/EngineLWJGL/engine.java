@@ -1,3 +1,4 @@
+package fr.EngineLWJGL;
 import fr.EngineLWJGL.Engine.Graphic.MainEngine;
 import fr.EngineLWJGL.Engine.Graphic.Window;
 

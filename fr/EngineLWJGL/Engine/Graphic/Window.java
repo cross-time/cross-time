@@ -69,5 +69,10 @@ public class Window
 	{
 		Display.destroy();
 	}
+
+	public static void resize()
+	{
+
+	}
 }
 

@@ -1,5 +1,7 @@
 package fr.EngineLWJGL.Engine.Graphic;
 
+import org.lwjgl.opengl.Display;
+
 import fr.EngineLWJGL.Engine.Game.Game;
 
 public class MainEngine 
@@ -8,11 +10,13 @@ public class MainEngine
 	private long lastTime;
 	private static int FRAME_PER_SECOND = 60;
 	private Game game;
+	int width;
 	
 	public MainEngine()
 	{
 		isRunning = false;
 		game = new Game();
+		width = Display.getWidth();
 	}
 	
 	public void start()
@@ -40,10 +44,15 @@ public class MainEngine
 		while(isRunning)
 		{
 			
-			
-			
 			if(Window.isClosedRequested())
 				stop();
+			
+			if(Display.wasResized())
+			{
+				Game.func();
+				width = Display.getWidth();
+			}
+			
 			Input.update();
 			game.input();
 			game.update();

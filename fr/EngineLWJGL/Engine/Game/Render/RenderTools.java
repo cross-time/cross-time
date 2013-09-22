@@ -1,4 +1,4 @@
-package fr.EngineLWJGL.Engine.Graphic;
+package fr.EngineLWJGL.Engine.Game.Render;
 
 import org.lwjgl.opengl.GL11;
 
@@ -18,11 +18,17 @@ public class RenderTools
 	
 	public static void clear()
 	{
-		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
+		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
+		GL11.glClearDepth(1.0f);
 	}
 	
 	public static void colorRGB(Color color)
 	{
 		GL11.glColor3d(color.getR(), color.getG(), color.getB());
+	}
+	
+	public static void colorRGB(int r, int g, int b)
+	{
+		GL11.glColor3d(r/255d, g/255d, b/255d);
 	}
 }

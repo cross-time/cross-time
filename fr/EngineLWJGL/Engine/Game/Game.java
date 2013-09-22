@@ -1,18 +1,41 @@
 package fr.EngineLWJGL.Engine.Game;
 
+import java.nio.FloatBuffer;
+
+
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.util.glu.GLU;
 
+import fr.EngineLWJGL.Engine.Game.Lighting.Lighting;
+import fr.EngineLWJGL.Engine.Game.Render.Render;
+import fr.EngineLWJGL.Engine.Game.Render.RenderTools;
 import fr.EngineLWJGL.Engine.Graphic.Input;
-import fr.EngineLWJGL.Engine.Graphic.Render;
-import fr.EngineLWJGL.Engine.Graphic.RenderTools;
 
 public class Game 
 {
 	float tr;
+	Lighting light = null;
+	
 	public Game()
 	{
 		tr = 0;
+		
+		GL11.glMatrixMode(GL11.GL_PROJECTION);
+	    GL11.glLoadIdentity();
+	    GLU.gluPerspective(70,(float)Display.getWidth()/Display.getHeight(),1,1000);
+	    GL11.glEnable(GL11.GL_DEPTH_TEST);
+	    //GL11.glPolygonMode (GL11.GL_FRONT_AND_BACK, GL11.GL_LINE);
+	    GL11.glEnable(GL11.GL_SMOOTH);
+	    //GL11.glMatrixMode(GL11.GL_MODELVIEW);
+	    light = new Lighting();
+	    light.start();
+	}
+	
+	public static void func()
+	{
+		GL11.glViewport(0, 0, Display.getWidth(), Display.getHeight());
+	    System.out.println("Resize");
 	}
 	
 	public void input()
@@ -21,6 +44,8 @@ public class Game
 			System.out.println("Escape pressed");
 		if(Input.isKeyDown(Input.KEY_A))
 			System.out.println("A pressed");
+		
+		//Render.render[2].input();
 	}
 	
 	public void update()
@@ -31,24 +56,23 @@ public class Game
 	public void render()
 	{
 		RenderTools.clear();
-		GL11.glLoadIdentity();
-		GL11.glOrtho(0.0, Display.getDisplayMode().getWidth(), 0.0, Display.getDisplayMode().getHeight(), -1.0, 1.0);
-		/*GL11.glLoadIdentity();
-		GL11.glOrtho(0.0, Display.getDisplayMode().getWidth(), 0.0, Display.getDisplayMode().getHeight(), -1.0, 1.0);
-		GL11.glTranslatef(0f, tr, 0.f);
-
-		GL11.glBegin(GL11.GL_TRIANGLES);
-			RenderUtil.colorRGB(Color.BLUE);
-			GL11.glVertex2i(200, Display.getDisplayMode().getHeight()/2);
-			RenderUtil.colorRGB(Color.BLUE);
-			GL11.glVertex2i(Display.getDisplayMode().getWidth()/2, Display.getDisplayMode().getHeight()/2-100);
-			RenderUtil.colorRGB(Color.BLUE);
-			GL11.glVertex2i(Display.getDisplayMode().getWidth()-200, Display.getDisplayMode().getHeight()/2);
-		GL11.glEnd();*/
+			
 		
-		Render.render[1].render();
-		GL11.glTranslatef(0f, 200f, 0.f);
-		Render.render[1].render();
-		//r.render();
+		
+		GL11.glMatrixMode(GL11.GL_MODELVIEW);
+	    GL11.glLoadIdentity();
+	 
+	    GLU.gluLookAt(8,10,8,2,0,2,0,1,0);
+		
+		RenderTools.colorRGB(75, 255, 255);
+		
+		//Render.render[3].render();
+		GL11.glPushMatrix();
+		GL11.glTranslatef(0, 2, 0);
+		RenderTools.colorRGB(30, 30, 30);
+		Render.render[2].render();
+		GL11.glPopMatrix();
+		
+		GL11.glFlush();
 	}
 }
