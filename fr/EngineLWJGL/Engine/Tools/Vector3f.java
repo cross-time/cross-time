@@ -4,11 +4,11 @@ public class Vector3f
 {
 	private float x, y, z;
 	
-	public Vector3f(float x, float y, float z)
+	public Vector3f(float par1X, float par2Y, float par3Z)
 	{
-		this.x = x;
-		this.y = y;
-		this.z = z;
+		x = par1X;
+		y = par2Y;
+		z = par3Z;
 	}
 	
 	public float length()
@@ -24,6 +24,13 @@ public class Vector3f
 	public Vector3f add(Vector3f vec)
 	{
 		return new Vector3f(x+vec.getX(), y+vec.getY(), z +vec.getZ());
+	}
+	
+	public void add(float par1X, float par2Y, float par3Z)
+	{
+		x += par1X;
+		y += par2Y;
+		z += par3Z;
 	}
 	
 	public Vector3f normal()

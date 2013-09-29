@@ -8,6 +8,7 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.glu.GLU;
 
 import fr.EngineLWJGL.Engine.Game.Lighting.Lighting;
+import fr.EngineLWJGL.Engine.Game.Render.Camera;
 import fr.EngineLWJGL.Engine.Game.Render.Render;
 import fr.EngineLWJGL.Engine.Game.Render.RenderTools;
 import fr.EngineLWJGL.Engine.Graphic.Input;
@@ -16,6 +17,7 @@ public class Game
 {
 	float tr;
 	Lighting light = null;
+	private Camera cam = null;
 	
 	public Game()
 	{
@@ -30,6 +32,7 @@ public class Game
 	    //GL11.glMatrixMode(GL11.GL_MODELVIEW);
 	    light = new Lighting();
 	    light.start();
+	    cam = new Camera();
 	}
 	
 	public static void func()
@@ -61,8 +64,11 @@ public class Game
 		
 		GL11.glMatrixMode(GL11.GL_MODELVIEW);
 	    GL11.glLoadIdentity();
-	 
-	    GLU.gluLookAt(8,10,8,2,0,2,0,1,0);
+	    
+	    cam.update();
+	    
+	    GLU.gluLookAt(cam.getPosX(), cam.getPosY(), cam.getPosZ(), 
+	    		cam.getExeX(), cam.getEyeY(), cam.getEyeZ(), 0, 1, 0);
 		
 		RenderTools.colorRGB(75, 255, 255);
 		

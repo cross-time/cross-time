@@ -10,8 +10,8 @@ public class Render
 	 * Liste modelisation
 	 */
 	public static final Render map = new RenderMap(1);
-	public static final Render cube = new RenderCube(2, "modaship4.obj");
-	public static final Render plan = new RenderCube(3, "plan.obj");
+	public static final Render cube = new RenderCube(2, "modaship2.obj");
+	//public static final Render plan = new RenderCube(3, "plan.obj");
 	
 	
 	private int id;
